@@ -23,7 +23,7 @@ export default function TestimonialSlider({
 }: TestimonialSliderProps) {
   return (
     <>
-      <section className="w-full py-4">
+      <section className="w-full py-4 mt-3">
         <div className="mx-auto lg:max-w-6xl px-3">
           <Carousel
             opts={{
@@ -39,12 +39,10 @@ export default function TestimonialSlider({
             <CarouselContent>
               {testimonials && testimonials.map((testimonial, index) => (
                 <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
-                  <div className="flex flex-col px-4 py-5 sm:p-6">
-                    <q className="flex-1 text-gray-600 dark:text-gray-300">
-                      {testimonial.quote}
-                    </q>
-                    <div className="mt-6 flex gap-3">
-                      <span className="inline-flex rounded-full">
+                  <div className="flex flex-col px-4 py-3  justify-center sm:p-6 border border-gray-400 shadow">
+                    
+                    <div className=" flex gap-3 items-center">
+                      <div className="inline-flex rounded-full">
                         <Image
                           loader={imageLoader}
                           className="h-10 w-10 rounded-full"
@@ -54,13 +52,13 @@ export default function TestimonialSlider({
                           src={testimonial.imgSrc}
                           loading="lazy"
                         />
-                      </span>
+                      </div>
                       <div>
-                        <p className="text-sm font-semibold text-gray-900 dark:text-white">
-                          {testimonial.name}
+                        <p className="text-sm font-semibold text-gray-900 ">
+                          Product Name
                         </p>
                         <p className="text-sm text-gray-500 dark:text-gray-400">
-                          {testimonial.role}
+                          Price 400
                         </p>
                       </div>
                     </div>

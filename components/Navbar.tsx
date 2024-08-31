@@ -4,8 +4,8 @@ import { CgProfile } from "react-icons/cg";
 
 const Navbar = () => {
   return (
-    <nav className="shadow">
-      <div className="container px-28 flex justify-between mx-auto  py-2 items-center">
+    <nav className="shadow themeColor1 text-white">
+      <div className="max-w-7xl mx-auto flex justify-between   py-2 items-center">
         <div className="search min-w-84 flex items-center gap-5">
           <div>Logo</div>
           <input

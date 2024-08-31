@@ -5,7 +5,21 @@
 .gradientBlue{
   background-image: linear-gradient(to right,rgb(125,211,252),rgb(125,211,252));
   border: 2px dashed white;
-  text-shadow: 1px 1px 1px rgb(49, 49, 49);
   letter-spacing: 2px;
-  color: wheat;
+  color: white;
+}
+.text-shadow{
+  text-shadow: 1px 1px 1px rgb(49, 49, 49);
+}
+.heroSection{
+  background-image: linear-gradient(to right,rgba(20, 21, 21, 0.7),rgba(0, 0, 0, 0.5)),url("/images/Screenshot 2024-09-01 012559.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.themeColor1{
+  background: rgb(47, 60, 77);
+}
+.themeColor2{
+  background: rgb(31,41,55);
 }

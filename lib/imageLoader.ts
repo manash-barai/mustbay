@@ -4,5 +4,5 @@ interface ImageLoaderParams {
     quality?: number;
   }
   
-  export const imageLoader = ({ src, width, quality = 75 }: ImageLoaderParams): string => 
+  export const imageLoader = ({ src, width, quality = 100 }: ImageLoaderParams): string => 
     `${src}?w=${width}&q=${quality}`;
