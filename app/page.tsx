@@ -1,113 +1,196 @@
+import BuyOption from "@/components/BuyOption";
+import Quentity from "@/components/Quentity";
 import Image from "next/image";
+import React from "react";
+import { PiCurrencyInr } from "react-icons/pi";
+import { CiShare2 } from "react-icons/ci";
+import { CiDeliveryTruck } from "react-icons/ci";
+import TestimonialSlider from "@/components/Testimonial";
 
-export default function Home() {
+export default function page() {
+
+  const testimonials = [
+    {
+      quote:
+        "Nostrud tempor sunt fugiat. Dolor in sint dolore labore non occaecat adipisicing Lorem labore ullamco enim excepteur. In fugiat Lorem sit velit id veniam esse eiusmod non ea voluptate cupidatat reprehenderit ullamco dolore. Mollit laborum occaecat aliquip.",
+      name: "Rose Roberson",
+      role: "CEO at Company",
+      imgSrc: "https://i.pravatar.cc/120?img=1",
+    },
+    {
+      quote:
+        "Eiusmod dolor aute ut nulla pariatur officia consequat aute amet exercitation. Culpa consectetur dolor pariatur commodo aliqua amet tempor nisi enim deserunt elit cillum.",
+      name: "Chace Rodgers",
+      role: "CEO at Company",
+      imgSrc: "https://i.pravatar.cc/120?img=10",
+    },
+    {
+      quote:
+        "Id duis velit enim officia ad nisi incididunt magna ex dolor minim deserunt dolor.",
+      name: "Cornelius Sheppard",
+      role: "CEO at Company",
+      imgSrc: "https://i.pravatar.cc/120?img=9",
+    },
+    {
+      quote:
+        "Consectetur voluptate pariatur dolore laboris. Eiusmod dolor aute ut nulla pariatur officia consequat aute amet exercitation.",
+      name: "Chace Rodgers",
+      role: "CEO at Company",
+      imgSrc: "https://i.pravatar.cc/120?img=7",
+    },
+    {
+      quote:
+        "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur voluptate pariatur dolore laboris. Eiusmod dolor aute ut nulla pariatur officia consequat aute amet exercitation.",
+      name: "Cornelius Sheppard",
+      role: "CEO at Company",
+      imgSrc: "https://i.pravatar.cc/120?img=8",
+    },
+    {
+      quote:
+        "Consectetur voluptate pariatur dolore laboris. Eiusmod dolor aute ut nulla pariatur officia consequat aute amet exercitation.",
+      name: "Chace Rodgers",
+      role: "CEO at Company",
+      imgSrc: "https://i.pravatar.cc/120?img=2",
+    },
+    {
+      quote:
+        "Id duis velit enim officia ad nisi incididunt magna ex dolor minim deserunt dolor.",
+      name: "Cornelius Sheppard",
+      role: "CEO at Company",
+      imgSrc: "https://i.pravatar.cc/120?img=3",
+    },
+  ];
+  const quentity = () => {};
+  
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:size-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
+    <div className="container mt-16 px-20 mx-auto">
+      <div className="flex gap-11">
+        <div className="img flex flex-1 gap-2">
+          <div className="imgSort via-fuchsia-100 flex-1 flex flex-col gap-2">
+            <div className="shadow relative w-full h-24">
+              <Image
+                className=" border p-3"
+                src="/images/foodZone.png"
+                objectFit="cover"
+                layout="fill"
+                objectPosition="center"
+                quality={100}
+                alt=""
+              />
+            </div>
+            <div className="shadow relative w-full h-24">
+              <Image
+                className=" border p-3"
+                src="/images/foodZone.png"
+                objectFit="cover"
+                layout="fill"
+                objectPosition="center"
+                quality={100}
+                alt=""
+              />
+            </div>
+            <div className="shadow relative w-full h-24">
+              <Image
+                className=" border p-3"
+                src="/images/foodZone.png"
+                objectFit="cover"
+                layout="fill"
+                objectPosition="center"
+                quality={100}
+                alt=""
+              />
+            </div>
+            <div className="shadow relative w-full h-24">
+              <Image
+                className=" border p-3"
+                src="/images/foodZone.png"
+                objectFit="cover"
+                layout="fill"
+                objectPosition="center"
+                quality={100}
+                alt=""
+              />
+            </div>
+          </div>
+          <div className="imgBig border  w-9/12      relative rounded shadow-lg">
             <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
+              className="p-2"
+              src="/images/foodZone.png"
+              objectFit="contain"
+              layout="fill"
+              objectPosition="top"
+              quality={100}
+              alt=""
             />
-          </a>
+          </div>
+        </div>
+        
+        <div className="w-96 border rounded px-3 py-1">
+          <div className="flex justify-between">
+            <div>
+              <h1 className="text-xl font-medium">Product Name</h1>
+              <h2 className="text-2xl font-medium flex  items-center">
+                {" "}
+                <PiCurrencyInr size={27} /> 400{" "}
+                <span className="ml-4 text-xl mt-1 line-through text-gray-400">
+                  {" "}
+                  {"<-"} <span className="ml-2"></span> 600{" "}
+                </span>
+              </h2>
+              <p className="text-gray-400 text-[13px]">Inclusive all taxes</p>
+            </div>
+            <div className=" ">
+              <CiShare2 size={32} />
+            </div>
+          </div>
+          <h3 className="bg-sky-200 border inline-block border-white  px-2 border-dashed mt-2">
+            Free delivery
+          </h3>
+          <div className="gradientBlue py-5 mt-3">
+            <p className="text-center  font-semibold">Offer Section</p>
+          </div>
+          <div className="">
+            <Quentity />
+          </div>
+          <div>
+            <BuyOption />
+          </div>
+          <div className="mt-3">
+
+          <div className="px-3 border  flex gap-2 items-center py-2 border-gray-400">
+            <CiDeliveryTruck  color="white" className="bg-black rounded-full p-1" size={27} />
+            <p className="text-[14px] text-gray-700">Get it delivered in 4-9 days</p>
+          </div>
+
+          <div className="px-3 border border-t-0 flex gap-2 items-center py-2 border-gray-400">
+            <PiCurrencyInr color="white" className="bg-black rounded-full p-1" size={27} />
+            <p className="text-[14px] text-gray-700">Get it delivered in 4-9 days</p>
+          </div>
+          </div>
         </div>
       </div>
 
-      <div className="relative z-[-1] flex place-items-center before:absolute before:h-[300px] before:w-full before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 sm:before:w-[480px] sm:after:w-[240px] before:lg:h-[360px]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
+      <div className="mt-10 flex gap-2 items-center ">
+      <h2 className=" text-xl">Product Information :</h2>
+      <ul className="flex gap-3">
+        <p className="text-gray-600">Brand :  <span className="bg-sky-300 border border-dashed border-white px-3 py-1">Abc</span>  </p>
+        <p className="text-gray-600">Country :  <span className="bg-sky-300 border border-dashed border-white px-3 py-1">Abc</span>  </p>
+        <p className="text-gray-600">Product Type :  <span className="bg-sky-300 border border-dashed border-white px-3 py-1">Abc</span>  </p>
+        <p className="text-gray-600">Life Cycle :  <span className="bg-sky-300 border border-dashed border-white px-3 py-1">Abc</span>  </p>
+
+      </ul>
+
+
+      </div>
+      <div className="mt-5">
+      <h2 className=" text-xl underline-offset underline-offset-8 underline">Product Description :</h2>
+      <p className="mt-3 text-gray-600">"Lorem ipsum dolor sit, amet consectetur adipisicing elit. Accusamus sit culpa nobis, dolorem ad excepturi sint dolore esse. Aut cupiditate nesciunt, tempora placeat modi dolore sed nemo voluptatem porro soluta earum neque excepturi perferendis doloribus atque ex ducimus laborum facere harum fugiat a non dignissimos alias! Consequuntur sint nihil excepturi, maxime error eius assumenda minima fuga, quae nemo eaque necessitatibus! Rerum quidem repudiandae, et odit aut alias consequuntur velit perspiciatis. Impedit voluptatem et nobis quaerat repellendus corrupti architecto, ex asperiores ullam, maiores delectus sunt cumque. Laboriosam, maiores error blanditiis ducimus assumenda ea quos delectus repellendus velit libero quae soluta hic?" </p>
       </div>
 
-      <div className="mb-32 grid text-center lg:mb-0 lg:w-full lg:max-w-5xl lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
 
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Explore starter templates for Next.js.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-balance text-sm opacity-50">
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
+      <div className="recent">
+        <TestimonialSlider testimonials={testimonials}/>
       </div>
-    </main>
+    </div>
   );
 }
