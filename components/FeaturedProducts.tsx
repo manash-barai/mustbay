@@ -10,7 +10,7 @@ const products = [
 const FeaturedProducts = () => {
   return (
     <section className="py-16  ">
-      <div className="mx-auto max-w-7xl mx-auto">
+      <div className="mx-auto max-w-7xl ">
         <h2 className="text-3xl font-bold text-white text-shadow  text-center themeColor1 border w-72 mx-auto py-2  border-white  px-2 border-dashed">
           Featured Products
         </h2>
