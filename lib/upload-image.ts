@@ -1,21 +1,40 @@
 import cloudinaryV2 from "./cloudinary";
-import { rejects } from "assert";
 
-export const uploadImage=async(file:File,folder:string)=>{
+export const uploadImage = async (file: File, folder: string) => {
+    const buffer = await file.arrayBuffer();
+    const bytes = Buffer.from(buffer);
 
-    const buffer=await file.arrayBuffer();
-    const bytes=Buffer.from(buffer)
-
-  return  new Promise(async(resolve,reject)=>{
-       await cloudinaryV2.uploader.upload_stream({
-            resource_type:'auto',
-            folder:folder
-        },async(err,result)=>{
-            if(err){
-                reject(err.message);
+    return new Promise((resolve, reject) => {
+        const uploadStream = cloudinaryV2.uploader.upload_stream(
+            {
+                resource_type: 'auto',
+                folder: folder
+            },
+            (err, result) => {
+                if (err) {
+                    reject(err);  // Reject with the full error object for more details
+                } else {
+                    resolve(result);
+                }
             }
-            resolve(result)
-        }).end(bytes)
-    })
+        );
 
-}
+        uploadStream.end(bytes);
+    });
+};
+
+
+export const deleteImage = async (public_id: string) => {
+    return new Promise((resolve, reject) => {
+        cloudinaryV2.uploader.destroy(public_id, (error, result) => {
+            if (error) {
+                reject(error);
+            } else {
+                resolve(result);
+            }
+        });
+    });
+};
+
+
+    

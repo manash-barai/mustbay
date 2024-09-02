@@ -1,8 +1,9 @@
 "use client"
-import { useQuantityStore } from '@/usestore/store';
+
+import { useProductStore } from "@/usestore/store";
 
 const Quentity = () => {
-    const { quantity, increase, decrease } = useQuantityStore();
+    const { quantity, increase, decrease } = useProductStore();
   return (
     <div className='quemtitySize flex gap-2 items-center mt-3'>
         <p  className='text-sm bg-sky-200 border-white border   border-dashed py-1 px-3'>Quantity & Size </p>

@@ -12,7 +12,7 @@
   text-shadow: 1px 1px 1px rgb(49, 49, 49);
 }
 .heroSection{
-  background-image: linear-gradient(to right,rgba(20, 21, 21, 0.7),rgba(0, 0, 0, 0.5)),url("/images/Screenshot 2024-09-01 012559.png");
+  background-image: linear-gradient(to right,rgba(20, 21, 21, 0.7),rgba(0, 0, 0, 0.5)),url("/images/banner.webp");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -22,4 +22,48 @@
 }
 .themeColor2{
   background: rgb(31,41,55);
+}
+/* Custom scrollbar styles */
+.scrollbar-thin {
+  scrollbar-width: thin; /* For Firefox */
+  scrollbar-color: rgb(20, 68, 110) transparent; /* For Firefox */
+}
+
+/* For Webkit browsers (Chrome, Safari) */
+.scrollbar-thin::-webkit-scrollbar {
+  width: 8px; /* Adjust width to make the scrollbar thin */
+}
+
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: transparent; /* Track color */
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background-color: #4b5563; /* Slate-600 color */
+  border-radius: 8px; /* Optional: adds rounded corners to the scrollbar thumb */
+}
+
+
+.loadingContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  height: 100px; /* Adjust the height as needed */
+}
+
+.loadingCircle {
+  width: 70px; /* Diameter of the circle */
+  height: 70px;
+  border: 5px solid rgba(47, 60, 77, 0.3); /* Lighter border */
+  border-top-color: rgb(47, 60, 77); /* The top border will have the main color */
+  border-radius: 50%; /* Makes it a circle */
+  animation: rotate 2s linear infinite; /* Rotates the circle */
+}
+
+@keyframes rotate {
+  
+  100% {
+    transform: rotate(360deg);
+  }
 }
