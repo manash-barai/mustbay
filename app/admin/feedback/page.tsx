@@ -13,7 +13,7 @@ const Page = () => {
     image: { url: "", public_id: "" },
     description: "",
   });
-  const [feedbackList, setFeedbackList] = useState<Feedback[]>([]);
+  
   const [loadings, setLoadings] = useState(false);
   const [loadingsdeletefeedback, setLoadingsdeletefeedback] = useState<string>("");
 
@@ -116,8 +116,7 @@ const Page = () => {
       }
 
       const result = await response.json();
-        console.log('result',result.data);
-        console.log('result',result);
+       
         insertFeedback(result.data)
 
       setFormData({
@@ -161,7 +160,7 @@ const Page = () => {
                 key={index}
                 className="p-4 bg-white w-72 rounded-lg shadow-md border flex flex-col items-start relative"
               >
-                {loadingsdeletefeedback!=="" && loadingsdeletefeedback===feedback._id && <div className="absolute top-0 start-0 w-full h-full"><LoadingBar/> </div>}
+                {loadingsdeletefeedback!=="" && loadingsdeletefeedback===feedback._id && <div style={{background:"rgba(0,0,0,0.5"}} className="absolute z-20  top-0 start-0 w-full h-full flex justify-center items-center"><LoadingBar/> </div>}
                 <div className="w-full relative h-48">
                   <Image
                     src={feedback.image.url}

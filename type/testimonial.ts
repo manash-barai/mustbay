@@ -51,7 +51,7 @@ export type Product = {
 };
 
 export type Feedback={
-  _id?:string;
+  _id:string;
   name: string;
   image:ImageData;
   description: string;
