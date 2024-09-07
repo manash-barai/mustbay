@@ -1,6 +1,6 @@
 import { connectToDB } from "@/lib/mongodb";
 import User from "@/models/User";
-import { sendWhatsAppMessage } from "@/utils/sendWhatsAppMessage";
+// import { sendWhatsAppMessage } from "@/utils/sendWhatsAppMessage";
 import { NextRequest, NextResponse } from "next/server";
 
 

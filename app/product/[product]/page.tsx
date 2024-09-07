@@ -1,4 +1,4 @@
-import TestimonialSlider from "@/components/Testimonial";
+// import TestimonialSlider from "@/components/Testimonial";
 import React from "react";
 import { PiCurrencyInr } from "react-icons/pi";
 import { CiShare2 } from "react-icons/ci";
@@ -16,7 +16,7 @@ const page = async ({ params }: { params: { product: string } }) => {
 
   const customarFeedbackPromise = customareFeedback();
   const singleProductsPromise = singleProduct({ product });
-
+  
   // Wait for both promises to resolve
   const [customarFeedback, singleProducts] = await Promise.all([
     customarFeedbackPromise,
@@ -152,9 +152,9 @@ const page = async ({ params }: { params: { product: string } }) => {
         </p>
       </div>
 
-      <div className="recent">
+      {/* <div className="recent">
         <TestimonialSlider testimonials={customarFeedback.feedBack} />
-      </div>
+      </div> */}
     </div>
   );
 };

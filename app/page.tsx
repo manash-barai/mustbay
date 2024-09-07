@@ -16,7 +16,7 @@ const page = async() => {
       <h2 className="text-3xl font-bold text-white text-shadow  text-center themeColor1 border w-72 mx-auto py-2  border-white  px-2 border-dashed">
           Customar Feedback
         </h2>
-      <TestimonialSlider   testimonials={customarFeedback.feedBack}  />
+      {/* <TestimonialSlider   testimonials={customarFeedback.feedBack}  /> */}
       </div>
     </div>
   )

@@ -4,11 +4,11 @@ import { formData } from "@/type/testimonial";
 import Image from "next/image";
 import React, { useState } from "react";
 
-interface ProductUploadFormProps {
-  onClose: () => void;
-}
+// interface ProductUploadFormProps {
+//   onClose: () => {};
+// }
 
-const ProductUploadForm: React.FC<ProductUploadFormProps> = ({ onClose }) => {
+const ProductUploadForm= () => {
   const [loadingImage1, setLoadingImage1] = useState<boolean>(false);
   const [loadingImage2, setLoadingImage2] = useState<boolean>(false);
   const [loadingImage3, setLoadingImage3] = useState<boolean>(false);
@@ -23,13 +23,10 @@ const ProductUploadForm: React.FC<ProductUploadFormProps> = ({ onClose }) => {
     brand: "",
     country: "",
     lifeCycle: "",
-   
     image1: { url: "", public_id: "" },
     image2: { url: "", public_id: "" },
- 
     image3: { url: "", public_id: "" },
     image4: { url: "", public_id: "" },
-    
   });
 
   const handleChange = (
@@ -176,12 +173,9 @@ const ProductUploadForm: React.FC<ProductUploadFormProps> = ({ onClose }) => {
         lifeCycle: "",
         image1: { url: "", public_id: "" },
         image2: { url: "", public_id: "" },
+        image3: { url: "", public_id: "" },
         image4: { url: "", public_id: "" },
-      
-        image3: { url: "", public_id: "" }
-       
-      })
-     
+      });
     
     } catch (error) {
       console.error("Error:", error);
@@ -299,301 +293,129 @@ const ProductUploadForm: React.FC<ProductUploadFormProps> = ({ onClose }) => {
                 featureProduct: e.target.checked,
               }))
             }
-            className="mr-2"
+            className="form-checkbox"
           />
-          Feature Product
+          <span className="ml-2 text-sm text-gray-700">
+            Feature this product
+          </span>
         </label>
 
-        <div className="space-y-4 mt-4">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="flex flex-col">
-              <label
-                htmlFor="brand"
-                className="mb-1 text-sm font-medium text-gray-700"
-              >
-                Brand
-              </label>
-              <input
-                type="text"
-                name="brand"
-                id="brand"
-                placeholder="Brand"
-                value={formData.brand}
-                onChange={handleChange}
-                className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-            </div>
+        <div className="flex flex-col mt-6">
+          <div className="text-lg font-semibold text-gray-800">Images</div>
+          <div className="flex flex-wrap justify-center gap-10 my-11">
 
-            <div className="flex flex-col">
-              <label
-                htmlFor="country"
-                className="mb-1 text-sm font-medium text-gray-700"
-              >
-                Country
-              </label>
-              <input
-                type="text"
-                name="country"
-                value={formData.country}
-                id="country"
-                placeholder="Country"
-                onChange={handleChange}
-                className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-            </div>
 
-            <div className="flex flex-col">
-              <label
-                htmlFor="lifeCycle"
-                className="mb-1 text-sm font-medium text-gray-700"
-              >
-                Life Cycle
-              </label>
-              <input
-                type="text"
-                name="lifeCycle"
-                id="lifeCycle"
-                placeholder="Life Cycle"
-                value={formData.lifeCycle}
-                onChange={handleChange}
-                className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-            </div>
+
+            {/* {["image1", "image2", "image3", "image4"].map((name, index) => (
+              <div key={name} className="relative w-[220px] mx-h-[220px]">
+                {formData[name as keyof typeof formData]. ? (
+                  <>
+                    {loadingImage1 && name === "image1" && (
+                      <div className="border border-dashed w-[220px] h-[220px] flex justify-center items-center">
+                        <LoadingBar />
+                      </div>
+                    )}
+                    {loadingImage2 && name === "image2" && (
+                      <div className="border border-dashed w-[220px] h-[220px] flex justify-center items-center">
+                        <LoadingBar />
+                      </div>
+                    )}
+                    {loadingImage3 && name === "image3" && (
+                      <div className="border border-dashed w-[220px] h-[220px] flex justify-center items-center">
+                        <LoadingBar />
+                      </div>
+                    )}
+                    {loadingImage4 && name === "image4" && (
+                      <div className="border border-dashed w-[220px] h-[220px] flex justify-center items-center">
+                        <LoadingBar />
+                      </div>
+                    )}
+                    <div className="relative w-full">
+                      <Image
+                        src={formData[name as keyof typeof formData].url}
+                        alt={`Uploaded Image ${index + 1}`}
+                        width={220}
+                        height={220}
+                        objectFit="cover"
+                        className="rounded border"
+                      />
+                      <button
+                        type="button"
+                        onClick={() =>
+                          handleDeleteImage(
+                            formData[name as keyof typeof formData].public_id,
+                            name
+                          )
+                        }
+                        className="absolute top-2 right-2 bg-red-500 text-white p-1 rounded-full focus:outline-none"
+                      >
+                        ✕
+                      </button>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    {loadingImage1 && name === "image1" && (
+                      <div className="border border-dashed w-[220px] h-[220px] flex justify-center items-center">
+                        <LoadingBar />
+                      </div>
+                    )}
+                    {loadingImage2 && name === "image2" && (
+                      <div className="border border-dashed w-[220px] h-[220px] flex justify-center items-center">
+                        <LoadingBar />
+                      </div>
+                    )}
+                    {loadingImage3 && name === "image3" && (
+                      <div className="border border-dashed w-[220px] h-[220px] flex justify-center items-center">
+                        <LoadingBar />
+                      </div>
+                    )}
+                    {loadingImage4 && name === "image4" && (
+                      <div className="border border-dashed w-[220px] h-[220px] flex justify-center items-center">
+                        <LoadingBar />
+                      </div>
+                    )}
+                    <div className="flex flex-col items-center bg-slate-300 pt-2 rounded rounded-t-lg">
+                      <label className="mb-2 text-base text-gray-600 text-[13px] font-thin">
+                        Sample-{index + 1}
+                      </label>
+                      <button
+                        type="button"
+                        onClick={() => document.getElementById(name)?.click()}
+                        className="flex items-center justify-center w-full h-[220px] bg-gray-100 border border-dashed border-gray-300 rounded hover:bg-gray-200 focus:outline-none"
+                      >
+                        <span className="text-3xl text-gray-500">+</span>
+                      </button>
+                      <input
+                        type="file"
+                        accept="image/*"
+                        name={name}
+                        id={name}
+                        onChange={(e) => handleImageUpload(e, name)}
+                        className="hidden"
+                      />
+                    </div>
+                  </>
+                )}
+              </div>
+            ))} */}
+
+
+
+
+
+
           </div>
         </div>
 
-      
-
-
-
-
-        <div className="flex flex-wrap justify-center gap-10 my-11">
-    {/* Image 1 */}
-    <div className="relative w-[220px] mx-h-[220px]">
-      {loadingImage1 ? (
-        <div className="border border-dashed w-[220px] h-[220px] flex justify-center items-center">
-          <LoadingBar />
-        </div>
-      ) : (
-        <div className="flex flex-col items-center bg-slate-300 pt-2 rounded rounded-t-lg">
-          <label className="mb-2 text-base text-gray-600 text-[13px] font-thin">
-            Sample-1
-          </label>
-
-          {formData.image1.url ? (
-            <div className="relative w-full">
-              <Image
-                src={formData.image1.url}
-                alt="Sample-1"
-                width={220}
-                height={220}
-                objectFit="cover"
-                className="rounded border"
-              />
-              <button
-                type="button"
-                onClick={() =>
-                  handleDeleteImage(formData.image1.public_id, "image1")
-                }
-                className="absolute top-2 right-2 bg-red-500 text-white p-1 rounded-full focus:outline-none"
-              >
-                ✕
-              </button>
-            </div>
-          ) : (
-            <button
-              type="button"
-              onClick={() => document.getElementById("image1")?.click()}
-              className="flex items-center justify-center w-full h-[220px] bg-gray-100 border border-dashed border-gray-300 rounded hover:bg-gray-200 focus:outline-none"
-            >
-              <span className="text-3xl text-gray-500">+</span>
-            </button>
-          )}
-          <input
-            type="file"
-            accept="image/*"
-            name="image1"
-            id="image1"
-            onChange={(e) => handleImageUpload(e, "image1")}
-            className="hidden"
-          />
-        </div>
-      )}
-    </div>
-
-    {/* Image 2 */}
-    <div className="relative w-[220px] mx-h-[220px]">
-      {loadingImage2 ? (
-        <div className="border border-dashed w-[220px] h-[220px] flex justify-center items-center">
-          <LoadingBar />
-        </div>
-      ) : (
-        <div className="flex flex-col items-center bg-slate-300 pt-2 rounded rounded-t-lg">
-          <label className="mb-2 text-base text-gray-600 text-[13px] font-thin">
-            Sample-2
-          </label>
-
-          {formData.image2.url ? (
-            <div className="relative w-full">
-              <Image
-                src={formData.image2.url}
-                alt="Sample-2"
-                width={220}
-                height={220}
-                objectFit="cover"
-                className="rounded border"
-              />
-              <button
-                type="button"
-                onClick={() =>
-                  handleDeleteImage(formData.image2.public_id, "image2")
-                }
-                className="absolute top-2 right-2 bg-red-500 text-white p-1 rounded-full focus:outline-none"
-              >
-                ✕
-              </button>
-            </div>
-          ) : (
-            <button
-              type="button"
-              onClick={() => document.getElementById("image2")?.click()}
-              className="flex items-center justify-center w-full h-[220px] bg-gray-100 border border-dashed border-gray-300 rounded hover:bg-gray-200 focus:outline-none"
-            >
-              <span className="text-3xl text-gray-500">+</span>
-            </button>
-          )}
-          <input
-            type="file"
-            accept="image/*"
-            name="image2"
-            id="image2"
-            onChange={(e) => handleImageUpload(e, "image2")}
-            className="hidden"
-          />
-        </div>
-      )}
-    </div>
-
-    {/* Image 3 */}
-    <div className="relative w-[220px] mx-h-[220px]">
-      {loadingImage3 ? (
-        <div className="border border-dashed w-[220px] h-[220px] flex justify-center items-center">
-          <LoadingBar />
-        </div>
-      ) : (
-        <div className="flex flex-col items-center bg-slate-300 pt-2 rounded rounded-t-lg">
-          <label className="mb-2 text-base text-gray-600 text-[13px] font-thin">
-            Sample-3
-          </label>
-
-          {formData.image3.url ? (
-            <div className="relative w-full">
-              <Image
-                src={formData.image3.url}
-                alt="Sample-3"
-                width={220}
-                height={220}
-                objectFit="cover"
-                className="rounded border"
-              />
-              <button
-                type="button"
-                onClick={() =>
-                  handleDeleteImage(formData.image3.public_id, "image3")
-                }
-                className="absolute top-2 right-2 bg-red-500 text-white p-1 rounded-full focus:outline-none"
-              >
-                ✕
-              </button>
-            </div>
-          ) : (
-            <button
-              type="button"
-              onClick={() => document.getElementById("image3")?.click()}
-              className="flex items-center justify-center w-full h-[220px] bg-gray-100 border border-dashed border-gray-300 rounded hover:bg-gray-200 focus:outline-none"
-            >
-              <span className="text-3xl text-gray-500">+</span>
-            </button>
-          )}
-          <input
-            type="file"
-            accept="image/*"
-            name="image3"
-            id="image3"
-            onChange={(e) => handleImageUpload(e, "image3")}
-            className="hidden"
-          />
-        </div>
-      )}
-    </div>
-
-    {/* Image 4 */}
-    <div className="relative w-[220px] mx-h-[220px]">
-      {loadingImage4 ? (
-        <div className="border border-dashed w-[220px] h-[220px] flex justify-center items-center">
-          <LoadingBar />
-        </div>
-      ) : (
-        <div className="flex flex-col items-center bg-slate-300 pt-2 rounded rounded-t-lg">
-          <label className="mb-2 text-base text-gray-600 text-[13px] font-thin">
-            Sample-4
-          </label>
-
-          {formData.image4.url ? (
-            <div className="relative w-full">
-              <Image
-                src={formData.image4.url}
-                alt="Sample-4"
-                width={220}
-                height={220}
-                objectFit="cover"
-                className="rounded border"
-              />
-              <button
-                type="button"
-                onClick={() =>
-                  handleDeleteImage(formData.image4.public_id, "image4")
-                }
-                className="absolute top-2 right-2 bg-red-500 text-white p-1 rounded-full focus:outline-none"
-              >
-                ✕
-              </button>
-            </div>
-          ) : (
-            <button
-              type="button"
-              onClick={() => document.getElementById("image4")?.click()}
-              className="flex items-center justify-center w-full h-[220px] bg-gray-100 border border-dashed border-gray-300 rounded hover:bg-gray-200 focus:outline-none"
-            >
-              <span className="text-3xl text-gray-500">+</span>
-            </button>
-          )}
-          <input
-            type="file"
-            accept="image/*"
-            name="image4"
-            id="image4"
-            onChange={(e) => handleImageUpload(e, "image4")}
-            className="hidden"
-          />
-        </div>
-      )}
-    </div>
-  </div>
         <div className="flex justify-end mt-6">
           <button
             type="submit"
-            className="px-4 py-2 bg-blue-500 text-white font-semibold rounded hover:bg-blue-600 transition-colors duration-300"
+            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 focus:outline-none"
           >
-            Submit
+            Upload Product
           </button>
-          <button
-            type="button"
-            className="px-4 py-2 bg-gray-500 text-white font-semibold rounded ml-2 hover:bg-gray-600 transition-colors duration-300"
-            onClick={onClose}
-          >
-            Cancel
-          </button>
+          
         </div>
       </form>
     </div>
