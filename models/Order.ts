@@ -4,7 +4,7 @@ import mongoose, { Schema, models, model } from 'mongoose';
 
 const OrderSchema = new Schema(
   {
-    orderId: { type: String, required: true },
+    orderId: { type: Number },
     productId: { type: Schema.Types.ObjectId, ref: 'Product', required: true },
     
     status: { type: String, required: true },

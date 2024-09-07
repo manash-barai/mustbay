@@ -9,11 +9,15 @@ const Page = () => {
     const {loading, products, fetchProducts,deleteProduct} = useProductStore();
     
     const [productDeleteLoading, setproductDeleteLoading] = useState("")
-  useEffect(() => {
-    
-    
-    fetchProducts();
-  }, []);
+ 
+
+    useEffect(() => {
+      fetchProducts();
+    }, [fetchProducts]);
+
+
+
+
 
   const handleDelete = async(productId: string) => {
     setproductDeleteLoading(productId)

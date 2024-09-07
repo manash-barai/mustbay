@@ -1,25 +1,23 @@
-"use client";
-import { Feedback } from "@/type/testimonial";
+"use client"
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import LoadingBar from "@/components/LoadingBar";
 import { useProductStore } from "@/usestore/store";
+import { Feedback } from "@/type/testimonial";
 
 const Page = () => {
-  const { loading, feedBack, fetchFeedback,deleteFeedback,insertFeedback } = useProductStore();
+  const { loading, feedBack, fetchFeedback, deleteFeedback, insertFeedback } = useProductStore();
   const [formData, setFormData] = useState<Feedback>({
-    _id:"",
+    _id: "",
     name: "",
     image: { url: "", public_id: "" },
     description: "",
   });
-  const [feedbackList, setFeedbackList] = useState<Feedback[]>([]);
+  
   const [loadings, setLoadings] = useState(false);
   const [loadingsdeletefeedback, setLoadingsdeletefeedback] = useState<string>("");
 
-  const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
@@ -29,7 +27,6 @@ const Page = () => {
 
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     setLoadings(true);
-
     if (e.target.files && e.target.files[0]) {
       const form = new FormData();
       form.append("image", e.target.files[0]);
@@ -45,9 +42,6 @@ const Page = () => {
         }
 
         const result = await response.json();
-       
-        
-        
         setLoadings(false);
         if (result.url && result.public_id) {
           setFormData((prev) => ({
@@ -81,14 +75,11 @@ const Page = () => {
       if (!response.ok) {
         throw new Error("Failed to delete image.");
       }
-      setLoadings(false);
 
+      setLoadings(false);
       setFormData((prevData) => ({
         ...prevData,
-        image: {
-          url: "",
-          public_id: "",
-        },
+        image: { url: "", public_id: "" },
       }));
     } catch (error) {
       console.error("Error deleting image:", error);
@@ -99,15 +90,12 @@ const Page = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    const {_id,...restData}=formData;
+    const { _id, ...restData } = formData;
 
     try {
       const response = await fetch("/api/feed-back", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(restData),
       });
 
@@ -116,52 +104,41 @@ const Page = () => {
       }
 
       const result = await response.json();
-        console.log('result',result.data);
-        console.log('result',result);
-        insertFeedback(result.data)
+      insertFeedback(result.data);
 
-      setFormData({
-        _id:"",
-        name: "",
-        image: { url: "", public_id: "" },
-        description: "",
-      });
+      setFormData({ _id: "", name: "", image: { url: "", public_id: "" }, description: "" });
     } catch (error) {
       console.error("Error:", error);
     }
   };
 
-  const handleDelete =async (feedbackId: string) => {
-
-
-    setLoadingsdeletefeedback(feedbackId)
-   const result = await deleteFeedback(feedbackId);
-    if(result){
-      setLoadingsdeletefeedback("")
-      alert('delete successFully')
+  const handleDelete = async (feedbackId: string) => {
+    setLoadingsdeletefeedback(feedbackId);
+    const result = await deleteFeedback(feedbackId);
+    if (result) {
+      setLoadingsdeletefeedback("");
+      alert("Deleted successfully");
     }
-
-
-
   };
 
   useEffect(() => {
     fetchFeedback();
-  }, []);
+  }, [fetchFeedback]); // Add fetchFeedback to the dependency array
 
   return (
-    <div className="flex w-full mx-auto p-4 ">
+    <div className="flex w-full mx-auto p-4">
       {/* Feedback List */}
       <div className="flex-1">
         <h3 className="text-xl font-semibold mb-4">Customer Feedback List</h3>
         <div className="w-full flex flex-wrap gap-3">
           {feedBack &&
             feedBack.map((feedback, index) => (
-              <div
-                key={index}
-                className="p-4 bg-white w-72 rounded-lg shadow-md border flex flex-col items-start relative"
-              >
-                {loadingsdeletefeedback!=="" && loadingsdeletefeedback===feedback._id && <div className="absolute top-0 start-0 w-full h-full"><LoadingBar/> </div>}
+              <div key={index} className="p-4 bg-white w-72 rounded-lg shadow-md border flex flex-col items-start relative">
+                {loadingsdeletefeedback !== "" && loadingsdeletefeedback === feedback._id && (
+                  <div style={{ background: "rgba(0,0,0,0.5" }} className="absolute z-20 top-0 start-0 w-full h-full flex justify-center items-center">
+                    <LoadingBar />
+                  </div>
+                )}
                 <div className="w-full relative h-48">
                   <Image
                     src={feedback.image.url}
@@ -176,33 +153,23 @@ const Page = () => {
                   <p className="text-gray-700">{feedback.description}</p>
                   <p className="text-gray-700">
                     {feedback.createdAt
-                      ? `Post on : ${new Date(
-                          feedback.createdAt
-                        ).toLocaleDateString("en-IN")}`
+                      ? `Posted on: ${new Date(feedback.createdAt).toLocaleDateString("en-IN")}`
                       : "Date not available"}
                   </p>
                 </div>
-                <button
-                  onClick={() => handleDelete(feedback._id)}
-                  className="bg-red-500 text-white py-1 mt-3 px-4 rounded-lg hover:bg-red-600 focus:outline-none"
-                >
+                <button onClick={() => handleDelete(feedback._id)} className="bg-red-500 text-white py-1 mt-3 px-4 rounded-lg hover:bg-red-600 focus:outline-none">
                   Delete
                 </button>
               </div>
             ))}
         </div>
       </div>
-      {/* Feedback Form */}
-      <form
-        onSubmit={handleSubmit}
-        className="mb-8 p-4 bg-white rounded-lg  border"
-      >
-        <h2 className="text-xl font-semibold mb-4">Customer Feedback</h2>
 
+      {/* Feedback Form */}
+      <form onSubmit={handleSubmit} className="mb-8 p-4 bg-white rounded-lg border">
+        <h2 className="text-xl font-semibold mb-4">Customer Feedback</h2>
         <div className="mb-4">
-          <label className="block text-gray-700 font-medium mb-2">
-            Customer Name
-          </label>
+          <label className="block text-gray-700 font-medium mb-2">Customer Name</label>
           <input
             type="text"
             name="name"
@@ -220,9 +187,7 @@ const Page = () => {
           </div>
         ) : (
           <div className="flex flex-col items-center bg-slate-300 pt-2 rounded rounded-t-lg shadow-lg">
-            <label className="mb-2 text-base text-gray-600 text-[13px] font-thin">
-              Upload Image
-            </label>
+            <label className="mb-2 text-base text-gray-600 text-[13px] font-thin">Upload Image</label>
 
             {formData.image.url ? (
               <div className="relative w-full">
@@ -262,25 +227,20 @@ const Page = () => {
           </div>
         )}
 
-        <div className="mb-4 ">
-          <label className="block text-gray-700 font-medium mb-2 mt-3">
-            Description
-          </label>
+        <div className="mb-4">
+          <label className="block text-gray-700 font-medium mb-2 mt-3">Description</label>
           <textarea
             name="description"
             value={formData.description}
             onChange={handleInputChange}
-            className="w-full px-3 py-2 border rounded-lg focus:outline-none  shadow-lg"
+            className="w-full px-3 py-2 border rounded-lg focus:outline-none shadow-lg"
             placeholder="Enter your feedback"
             rows={4}
             required
           ></textarea>
         </div>
 
-        <button
-          type="submit"
-          className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 focus:outline-none"
-        >
+        <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 focus:outline-none">
           Submit Feedback
         </button>
       </form>
