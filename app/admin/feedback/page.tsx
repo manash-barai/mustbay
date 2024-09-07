@@ -120,10 +120,9 @@ const Page = () => {
       alert("Deleted successfully");
     }
   };
-
   useEffect(() => {
     fetchFeedback();
-  }, [fetchFeedback]); // Add fetchFeedback to the dependency array
+  }, [fetchFeedback]);
 
   return (
     <div className="flex w-full mx-auto p-4">
