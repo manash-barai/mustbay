@@ -3,7 +3,12 @@ import React from 'react';
 export async function singleProduct({ product }: { product: string }) {
     try {
         const result = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN}api/singleProduct?id=${product}`, {
-            next: { revalidate: 120 }, // Revalidate every 2 minutes
+            method: 'GET',
+            headers: {
+                'Cache-Control': 'no-cache, no-store, must-revalidate', // Prevent caching
+                'Pragma': 'no-cache', // For HTTP/1.0 compatibility
+                'Expires': '0' // For HTTP/1.1 compatibility
+            },
         });
 
         if (!result.ok) {

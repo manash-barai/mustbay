@@ -1,5 +1,4 @@
-// import TestimonialSlider from "@/components/Testimonial";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { PiCurrencyInr } from "react-icons/pi";
 import { CiShare2 } from "react-icons/ci";
 import { CiDeliveryTruck } from "react-icons/ci";
@@ -14,14 +13,20 @@ import SinglepageImage from "@/components/SinglepageImage";
 const page = async ({ params }: { params: { product: string } }) => {
   const { product } = params; // Extract the ID from the params
 
-  const customarFeedbackPromise = customareFeedback();
-  const singleProductsPromise = singleProduct({ product });
+  // const customarFeedbackPromise = customareFeedback();
+  const singleProducts =await singleProduct({ product });
   
-  // Wait for both promises to resolve
-  const [customarFeedback, singleProducts] = await Promise.all([
-    customarFeedbackPromise,
-    singleProductsPromise,
-  ]);
+  // // Wait for both promises to resolve
+  // const [customarFeedback, singleProducts] = await Promise.all([
+  //   customarFeedbackPromise,
+  //   singleProductsPromise,
+  // ]);
+
+  
+
+
+
+
 
   return (
     <div className=" mt-16 max-w-7xl mx-auto">
