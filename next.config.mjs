@@ -1,9 +1,12 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {};
 // next.config.mjs
 export default {
-    images: {
-      domains: ['res.cloudinary.com'],
-    },
-  };
-  
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'res.cloudinary.com',
+        pathname: '/**', // Allow all paths from Cloudinary
+      },
+    ],
+  },
+};

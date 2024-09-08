@@ -75,6 +75,7 @@ export const useProductStore = create<StoreState>((set) => ({
       set({ loading: false });  // Set loading to false when the delete is complete
     }
   },
+  
   fetchFeedback: async () => {
     set({ loading: true });  // Set loading to true when the fetch starts
     try {
