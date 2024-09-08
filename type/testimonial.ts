@@ -12,43 +12,37 @@ export type ImageData = {
 };
 
 
+// types.ts
+export interface ProductImage {
+  url: string;
+  public_id: string;
+}
 
-export type formData = {
+export interface Product {
+  _id: string;
   name: string;
   description: string;
   newPrice: number;
   oldPrice: number;
-  extraOffer: number;
+  extraOffer: string;
   featureProduct: boolean;
   brand: string;
   country: string;
   lifeCycle: string;
-  image1: ImageData;
-  image2: ImageData;
-  image4: ImageData;
-
-  image3: ImageData;
- 
-};
-
-export type Product = {
-  _id: string; // Add this line to include the _id field
-  name: string;
-  description?: string;
-  newPrice: number;
-  oldPrice?: number;
-  extraOffer?: string;
-  featureProduct: boolean;
-  image1: ImageData;
-  image2?: ImageData;
-  image3?: ImageData;
-  image4?: ImageData;
-  brand?: string;
-  country?: string;
-  lifeCycle?: string;
-  createdAt: string;  // ISO string format
+  createdAt: string;
   updatedAt: string;
-};
+  image1: ProductImage;
+  image2: ProductImage;
+  image3: ProductImage;
+  image4: ProductImage;
+}
+
+export interface SingleProductResponse {
+  singleProduct: Product;
+}
+
+
+
 
 export type Feedback={
   _id:string;

@@ -1,62 +1,72 @@
+// Add this at the top of your file to mark it as a Client Component
+"use client";
+
 import React, { useEffect, useState } from "react";
 import { PiCurrencyInr } from "react-icons/pi";
-import { CiShare2 } from "react-icons/ci";
-import { CiDeliveryTruck } from "react-icons/ci";
+import { CiShare2, CiDeliveryTruck } from "react-icons/ci";
 import Image from "next/image";
 import Quentity from "@/components/Quentity";
 import BuyOption from "@/components/BuyOption";
 import { customareFeedback } from "@/lib/customareFeedback";
-
 import { singleProduct } from "@/lib/singleProduct";
-
 import SinglepageImage from "@/components/SinglepageImage";
-const page = async ({ params }: { params: { product: string } }) => {
-  const { product } = params; // Extract the ID from the params
+import { Product } from "@/type/testimonial";
 
-  // const customarFeedbackPromise = customareFeedback();
-  const singleProducts =await singleProduct({ product });
-  
-  // // Wait for both promises to resolve
-  // const [customarFeedback, singleProducts] = await Promise.all([
-  //   customarFeedbackPromise,
-  //   singleProductsPromise,
-  // ]);
+interface ProductComponentProps {
+  singleProducts: Product;
+}
 
-  
+const Page = ({ params }: { params: { product: string } }) => {
+  const { product } = params;
 
+  const [singleProduct, setSingleProduct] = useState<ProductComponentProps | null>(null);
 
+  const fetchProduct = async () => {
+    try {
+      const result = await fetch(
+        `${process.env.NEXT_PUBLIC_DOMAIN}api/singleProduct?id=${product}`
+      );
+      const data: ProductComponentProps = await result.json();
+      if (!data) {
+        throw new Error("Invalid product data received");
+      }
+      setSingleProduct(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
-
+  useEffect(() => {
+    fetchProduct();
+  }, [product]);
 
   return (
-    <div className=" mt-16 max-w-7xl mx-auto">
+    <div className="mt-16 max-w-7xl mx-auto">
       <div className="flex gap-11">
-        <div className="flex-1">
-          <SinglepageImage SinglepageImage={singleProducts.singleProduct} />
-        </div>
+        {/* <div className="flex-1">
+          <SinglepageImage SinglepageImage={singleProduct?.singleProducts} />
+        </div> */}
 
         <div className="w-96 border rounded px-3 py-1">
           <div className="flex justify-between">
             <div>
               <h1 className="text-xl font-medium">
-                {singleProducts.singleProduct.name &&
-                  singleProducts.singleProduct.name}{" "}
+                {singleProduct?.singleProducts.name}
               </h1>
-              <h2 className="text-2xl font-medium flex  items-center">
-                {" "}
-                <PiCurrencyInr size={27} />{" "}
-                {singleProducts.singleProduct.newPrice}{" "}
+              <h2 className="text-2xl font-medium flex items-center">
+                <PiCurrencyInr size={27} />
+                {singleProduct?.singleProducts.newPrice}
                 <span className="ml-4 text-xl mt-1 line-through text-gray-400">
                   {" "}
                   {"<--"} <span className="ml-2"></span>{" "}
-                  {singleProducts.singleProduct.oldPrice}{" "}
+                  {singleProduct?.singleProducts.oldPrice}{" "}
                 </span>
-                <span className="ml-4 text-xl mt-1  text-gray-400">
+                <span className="ml-4 text-xl mt-1 text-gray-400">
                   {" "}
                   oFF <span className="ml-2"></span>{" "}
-                  {((Number(singleProducts.singleProduct.oldPrice) -
-                    Number(singleProducts.singleProduct.newPrice)) /
-                    Number(singleProducts.singleProduct.oldPrice)) *
+                  {((Number(singleProduct?.singleProducts.oldPrice) -
+                    Number(singleProduct?.singleProducts.newPrice)) /
+                    Number(singleProduct?.singleProducts.oldPrice)) *
                     100}{" "}
                   %{" "}
                 </span>
@@ -67,30 +77,27 @@ const page = async ({ params }: { params: { product: string } }) => {
               <CiShare2 size={32} />
             </div>
           </div>
-          <h3 className="themeColor1 border inline-block border-white  px-2 border-dashed mt-2 text-white">
+          <h3 className="themeColor1 border inline-block border-white px-2 border-dashed mt-2 text-white">
             Free delivery
           </h3>
           <div className="themeColor1 py-5 mt-3">
-            <p className="text-center  text-white  font-thin tracking-widest text-xl">
+            <p className="text-center text-white font-thin tracking-widest text-xl">
               {" "}
-              {singleProducts.singleProduct.extraOffer}% Off Extra
+              {singleProduct?.singleProducts.extraOffer}% Off Extra
             </p>
           </div>
           <div className="">
             <Quentity />
           </div>
 
-
-          {singleProducts && (
+          {singleProduct && (
             <div>
-              <BuyOption product={singleProducts.singleProduct} />
+              <BuyOption product={singleProduct.singleProducts} />
             </div>
           )}
 
-
-
           <div className="mt-3">
-            <div className="px-3 border  flex gap-2 items-center py-2 border-gray-400">
+            <div className="px-3 border flex gap-2 items-center py-2 border-gray-400">
               <CiDeliveryTruck
                 color="white"
                 className="bg-black rounded-full p-1"
@@ -115,53 +122,41 @@ const page = async ({ params }: { params: { product: string } }) => {
         </div>
       </div>
 
-      <div className="mt-10 border-b pb-11 border-gray-400 flex justify-center flex-col  ">
-        <h2 className="text-center text-2xl text-shadow themeColor1 border border-dashed border-white inline-block mx-auto py-2 text-white drop-shadow  shadow px-3">
+      <div className="mt-10 border-b pb-11 border-gray-400 flex justify-center flex-col">
+        <h2 className="text-center text-2xl text-shadow themeColor1 border border-dashed border-white inline-block mx-auto py-2 text-white drop-shadow shadow px-3">
           Product Information{" "}
         </h2>
-        <ul className="flex gap-3  justify-center mt-5 text-xl">
+        <ul className="flex gap-3 justify-center mt-5 text-xl">
           <p className="text-gray-600">
             Brand :{" "}
-            <span className="themeColor1 drop-shadow  shadow text-white text-shadow border border-dashed border-white px-3 py-1">
-              {" "}
-              {singleProducts.singleProduct.brand &&
-                singleProducts.singleProduct.brand}{" "}
+            <span className="themeColor1 drop-shadow shadow text-white text-shadow border border-dashed border-white px-3 py-1">
+              {singleProduct?.singleProducts.brand}
             </span>{" "}
           </p>
           <p className="text-gray-600">
             Country :{" "}
-            <span className="themeColor1 drop-shadow  shadow text-white text-shadow border border-dashed border-white px-3 py-1">
-              {" "}
-              {singleProducts.singleProduct.country &&
-                singleProducts.singleProduct.country}{" "}
+            <span className="themeColor1 drop-shadow shadow text-white text-shadow border border-dashed border-white px-3 py-1">
+              {singleProduct?.singleProducts.country}
             </span>{" "}
           </p>
-          {/* <p className="text-gray-600">Product Type :  <span className="themeColor1 drop-shadow  shadow text-white text-shadow border border-dashed border-white px-3 py-1">Abc</span>  </p> */}
           <p className="text-gray-600">
             Life Cycle :{" "}
-            <span className="themeColor1 drop-shadow  shadow text-white text-shadow border border-dashed border-white px-3 py-1">
-              {singleProducts.singleProduct.lifeCycle &&
-                singleProducts.singleProduct.lifeCycle}{" "}
+            <span className="themeColor1 drop-shadow shadow text-white text-shadow border border-dashed border-white px-3 py-1">
+              {singleProduct?.singleProducts.lifeCycle}
             </span>{" "}
           </p>
         </ul>
       </div>
       <div className="mt-11 flex justify-center flex-col">
-        <h2 className="text-center text-2xl text-shadow themeColor1 border border-dashed border-white inline-block mx-auto py-2 text-white drop-shadow  shadow px-3">
+        <h2 className="text-center text-2xl text-shadow themeColor1 border border-dashed border-white inline-block mx-auto py-2 text-white drop-shadow shadow px-3">
           Product Description{" "}
         </h2>
         <p className="mt-3 text-gray-600">
-          {" "}
-          {singleProducts.singleProduct.description &&
-            singleProducts.singleProduct.description}{" "}
+          {singleProduct?.singleProducts.description}
         </p>
       </div>
-
-      {/* <div className="recent">
-        <TestimonialSlider testimonials={customarFeedback.feedBack} />
-      </div> */}
     </div>
   );
 };
 
-export default page;
+export default Page;
