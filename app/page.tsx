@@ -8,6 +8,7 @@ const page = async() => {
 
   
   const customarFeedback = await customareFeedback();
+  
   return (
     <div className=' '>
       <HeroSection/>
